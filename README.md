@@ -197,13 +197,13 @@ loading persistence or UIKit knowledge they don't need.
 ### Prototype Live On GitHub
 https://github.com/NestroyMusoke/RC-apps-generator
 
-## March 15, 2026 — Day 5: Controlled Experiment
+## Controlled Experiment
 
 ### Experiment Setup
 
 Ran Gemini CLI on a fresh RC app with zero RC-specific context.
-Tested the same scenario Khizar described in the channel —
-a bot that greets hello messages — then extended it to include
+Tested the same scenario Khizar described in the channel...
+a bot that greets hello messages ... then extended it to include
 a slash command with persistence.
 
 ### Experiment 1 — Simple Message Listener
@@ -233,13 +233,13 @@ no output.
 ### Evidence Screenshots
 
 Compilation passed with zero errors — making the silent bug invisible:
-![Compile Success](Google Gemini 6.png)
+![Compile Success](gemini-6.png)
 
 The silent bug — message built but never finished with .finish():
-![Silent Bug](Google Gemini 7.png)
+![Silent Bug](gemini-7.png)
 
 Full generated slash command code from Gemini 3:
-![Generated Code](Google Gemin 5.png)
+![Generated Code](gemini-5.png)
 
 ### Session Stats
 
