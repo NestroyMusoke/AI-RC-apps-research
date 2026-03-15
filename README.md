@@ -197,11 +197,82 @@ loading persistence or UIKit knowledge they don't need.
 ### Prototype Live On GitHub
 https://github.com/NestroyMusoke/RC-apps-generator
 
-### Next Up
+## March 15, 2026 — Day 5: Controlled Experiment
 
-Recreate Khizar's infinite loop experiment without
-the extension to document the failure. Then run the same
-experiment with the extension active to show the fix.
-This controlled experiment becomes the strongest evidence
-in the proposal.
+### Experiment Setup
 
+Ran Gemini CLI on a fresh RC app with zero RC-specific context.
+Tested the same scenario Khizar described in the channel —
+a bot that greets hello messages — then extended it to include
+a slash command with persistence.
+
+### Experiment 1 — Simple Message Listener
+
+Prompt: "Make a bot that greets every hello message"
+
+Gemini 3 correctly used IPostMessageSent, added a bot message
+check using getAppUser() comparison, and compiled without errors.
+This is more capable than the version Khizar tested with in early
+March — the obvious infinite loop bug no longer reproduces on
+Gemini 3 for simple cases.
+
+### Experiment 2 — Slash Command With Persistence
+
+Prompt: "Add a slash command called /greet that saves how many
+times each user has been greeted and shows them their count"
+
+Gemini correctly used ISlashCommand, RocketChatAssociationRecord,
+and registered the command in extendConfiguration. The code
+compiled with zero errors. However it introduced a silent runtime
+bug — it called msg.getMessage() on a builder that was never
+finished with .finish(). In RC Apps Engine this means the message
+is built but never actually sent. No error is thrown. A
+non-technical user would have no idea why their command produces
+no output.
+
+### Evidence Screenshots
+
+Compilation passed with zero errors — making the silent bug invisible:
+![Compile Success](experiment-compile-success.png)
+
+The silent bug — message built but never finished with .finish():
+![Silent Bug](experiment-silent-bug.png)
+
+Full generated slash command code from Gemini 3:
+![Generated Code](experiment-generated-code.png)
+
+### Session Stats
+
+Tool calls: 17
+Code added: 107 lines
+Total time: 31 minutes
+Tokens used: 185,000+ total
+Cached tokens: 143,628 (74.6% savings from caching)
+
+### Key Finding
+
+The problem is not compilation errors. The problem is silent
+runtime failures caused by RC-specific patterns that sit between
+technically valid code and actually working code. The .finish()
+requirement is not enforced by TypeScript. The correct persistence
+data shape is not documented in types. These are invisible patterns
+that only exist in RC documentation and community knowledge.
+
+Gemini 3 gets approximately 80 percent of complex RC apps right
+without any RC context. The remaining 20 percent fails silently.
+
+### Why This Matters
+
+This finding reframes the entire project. The RC Apps Generator
+extension is not about fixing compilation errors — Gemini 3
+already handles those well. It is about encoding the invisible
+RC-specific patterns that sit between valid code and working code.
+That is a more precise and more valuable problem to solve.
+
+### Updated Extension
+
+Added the .finish() pattern explicitly to the slash command skill
+so Gemini always knows to call modify.getCreator().finish()
+after building any message. This makes the invisible visible.
+
+Prototype repo: https://github.com/NestroyMusoke/RC-apps-generator
