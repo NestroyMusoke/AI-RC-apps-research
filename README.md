@@ -243,11 +243,12 @@ Full generated slash command code from Gemini 3:
 
 ### Session Stats
 
-Tool calls: 17
-Code added: 107 lines
-Total time: 31 minutes
-Tokens used: 185,000+ total
-Cached tokens: 143,628 (74.6% savings from caching)
+- [ ] Tool calls: 17
+- [ ] Code added: 107 lines
+- [ ] Total time: 31 minutes
+- [ ] Tokens used: 185,000+ total
+- [ ] Cached tokens: 143,628 (74.6% savings from caching)
+( This benchmark is relevant to the Token Cost Problem that MEET raised in the communications channel)
 
 ### Key Finding
 
@@ -257,15 +258,14 @@ technically valid code and actually working code. The .finish()
 requirement is not enforced by TypeScript. The correct persistence
 data shape is not documented in types. These are invisible patterns
 that only exist in RC documentation and community knowledge.
-
-Gemini 3 gets approximately 80 percent of complex RC apps right
+Generally Gemini 3 gets about 80 percent of complex RC apps right
 without any RC context. The remaining 20 percent fails silently.
 
 ### Why This Matters
 
 This finding reframes the entire project. The RC Apps Generator
-extension is not about fixing compilation errors — Gemini 3
-already handles those well. It is about encoding the invisible
+extension is not about fixing compilation errors ... Gemini 3
+already handles those well. It is about ensuring encoding the invisible
 RC-specific patterns that sit between valid code and working code.
 That is a more precise and more valuable problem to solve.
 
