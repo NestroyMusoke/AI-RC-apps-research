@@ -233,13 +233,13 @@ no output.
 ### Evidence Screenshots
 
 Compilation passed with zero errors — making the silent bug invisible:
-![Compile Success](experiment-compile-success.png)
+![Compile Success](Google Gemini 6.png)
 
 The silent bug — message built but never finished with .finish():
-![Silent Bug](experiment-silent-bug.png)
+![Silent Bug](Google Gemini 7.png)
 
 Full generated slash command code from Gemini 3:
-![Generated Code](experiment-generated-code.png)
+![Generated Code](Google Gemin 5.png)
 
 ### Session Stats
 
