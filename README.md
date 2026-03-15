@@ -1,6 +1,6 @@
-# GSOC-2026-rc-apps-research
+# RC-apps-research
 Systematic research journal for GSoC 2026 in particular the Rocket.Chat AI Apps Generator
-# GSoC 2026 Research Journal
+#  My GSoC Research Journal
 ## Rocket.Chat — AI Apps Generator 
 
 This is my personal research log for the GSoC 2026 AI Rocket.Chat 
